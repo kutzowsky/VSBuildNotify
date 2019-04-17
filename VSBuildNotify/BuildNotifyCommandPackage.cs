@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
@@ -44,6 +46,12 @@ namespace VSBuildNotify
         /// </summary>
         public const string PackageGuidString = "d2a9f380-f42f-43bd-855c-5b8f08bb8c08";
 
+        public BuildEvents BuildEvents { get; private set; }
+
+        public bool CommandExecuted { get; set; }
+
+        private bool _overallBuildSuccess = true;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BuildNotifyCommandPackage"/> class.
         /// </summary>
@@ -66,10 +74,46 @@ namespace VSBuildNotify
         /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+            var dte = GetGlobalService(typeof(DTE)) as DTE2;
+
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+
+            BuildEvents = dte.Events.BuildEvents;
+
+            BuildEvents.OnBuildDone += BuildEvents_OnBuildDone;
+            BuildEvents.OnBuildProjConfigDone += BuildEvents_OnBuildProjConfigDone;
+
             await BuildNotifyCommand.InitializeAsync(this);
+        }
+
+        private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
+        {
+            if (CommandExecuted)
+            {
+                _overallBuildSuccess = _overallBuildSuccess && Success;
+            }
+        }
+
+        private void BuildEvents_OnBuildDone(vsBuildScope Scope, vsBuildAction Action)
+        {
+            if (CommandExecuted)
+            {
+                string messageTitle = "Build completed";
+                string messageText = _overallBuildSuccess ? "Success!!!" : "Error :(";
+
+                VsShellUtilities.ShowMessageBox(
+                    this,
+                    messageText,
+                    messageTitle,
+                    _overallBuildSuccess ? OLEMSGICON.OLEMSGICON_INFO : OLEMSGICON.OLEMSGICON_WARNING,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+                _overallBuildSuccess = true;
+                CommandExecuted = false;
+            }
         }
 
         #endregion
