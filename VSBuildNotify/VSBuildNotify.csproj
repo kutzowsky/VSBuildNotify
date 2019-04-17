@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="BuildNotifyCommand.cs" />
     <Compile Include="BuildNotifyCommandPackage.cs" />
+    <Compile Include="DTO\Notification.cs" />
+    <Compile Include="Notifiers\INotifier.cs" />
+    <Compile Include="Notifiers\MessageBoxNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

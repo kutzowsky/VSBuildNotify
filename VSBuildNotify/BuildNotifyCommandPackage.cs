@@ -13,6 +13,8 @@ using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
+using VSBuildNotify.DTO;
+using VSBuildNotify.Notifiers;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSBuildNotify
@@ -101,21 +103,16 @@ namespace VSBuildNotify
             if (CommandExecuted)
             {
                 string messageTitle = "Build completed";
-                string messageText = _overallBuildSuccess ? "Success!!!" : "Error :(";
+                string messageBody = _overallBuildSuccess ? "Success!!!" : "Error :(";
+                var notification = new Notification(messageTitle, messageBody);
 
-                VsShellUtilities.ShowMessageBox(
-                    this,
-                    messageText,
-                    messageTitle,
-                    _overallBuildSuccess ? OLEMSGICON.OLEMSGICON_INFO : OLEMSGICON.OLEMSGICON_WARNING,
-                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                var notifier = new MessageBoxNotifier(this);
+                notifier.Send(notification);
 
                 _overallBuildSuccess = true;
                 CommandExecuted = false;
             }
         }
-
         #endregion
     }
 }
