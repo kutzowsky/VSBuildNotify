@@ -55,6 +55,8 @@
       <Button guid="guidBuildNotifyCommandPackageCmdSet" id="BuildNotifyCommandId" priority="0x0100" type="Button">
         <Parent guid="guidBuildNotifyCommandPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Build Solution and Notify</ButtonText>
         </Strings>
@@ -71,6 +73,11 @@
       <Bitmap guid="guidImages" href="Resources\BuildNotifyCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
     </Bitmaps>
   </Commands>
+
+  <VisibilityConstraints>
+    <VisibilityItem guid="guidBuildNotifyCommandPackageCmdSet"
+                    id="BuildNotifyCommandId" context="UICONTEXT_SolutionExists" />
+  </VisibilityConstraints>
 
   <Symbols>
     <!-- This is the package guid. -->
