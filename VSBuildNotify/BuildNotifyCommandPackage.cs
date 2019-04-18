@@ -85,13 +85,13 @@ namespace VSBuildNotify
 
             BuildEvents = dte.Events.BuildEvents;
 
-            BuildEvents.OnBuildDone += BuildEvents_OnBuildDone;
-            BuildEvents.OnBuildProjConfigDone += BuildEvents_OnBuildProjConfigDone;
+            BuildEvents.OnBuildDone += OnSolutionBuildDone;
+            BuildEvents.OnBuildProjConfigDone += OnProjectBuildDone;
 
             await BuildNotifyCommand.InitializeAsync(this);
         }
 
-        private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
+        private void OnProjectBuildDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
         {
             if (CommandExecuted)
             {
@@ -99,7 +99,7 @@ namespace VSBuildNotify
             }
         }
 
-        private void BuildEvents_OnBuildDone(vsBuildScope Scope, vsBuildAction Action)
+        private void OnSolutionBuildDone(vsBuildScope Scope, vsBuildAction Action)
         {
             if (CommandExecuted)
             {
@@ -113,7 +113,10 @@ namespace VSBuildNotify
                 const string PUSHBULLET_AUTH_TOKEN = "TOP SECRET";
                 const string TARGET_DEVICE_ID = "SOME GUID";
 
-                var notifier = new PushbulletNotifier(new PushbulletClient(PUSHBULLET_AUTH_TOKEN), TARGET_DEVICE_ID); //TODO: use name on a device instead of internal Pushbullet ID
+                //TODO: maybe some logging?
+                //TODO: error handling
+
+                var notifier = new PushbulletNotifier(new PushbulletClient(PUSHBULLET_AUTH_TOKEN), TARGET_DEVICE_ID); //TODO: use name of a device instead of internal Pushbullet ID
 
                 notifier.Send(notification);
 

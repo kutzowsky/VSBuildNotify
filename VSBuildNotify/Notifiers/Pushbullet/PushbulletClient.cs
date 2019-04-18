@@ -21,10 +21,10 @@ namespace VSBuildNotify.Notifiers.Pushbullet
         {
             var push = new Push
             {
-                type = "note",
-                title = notification.Title,
-                body = notification.Body,
-                device_iden = targetDeviceId
+                Type = "note",
+                Title = notification.Title,
+                Body = notification.Body,
+                TargetDevice = targetDeviceId
             };
 
             using (var client = new HttpClient())

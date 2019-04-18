@@ -1,10 +1,19 @@
-﻿namespace VSBuildNotify.Notifiers.Pushbullet
+﻿using Newtonsoft.Json;
+
+namespace VSBuildNotify.Notifiers.Pushbullet
 {
     public class Push
     {
-        public string type { get; set; }
-        public string title { get; set; }
-        public string body { get; set; }
-        public string device_iden { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; }
+
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        [JsonProperty(PropertyName = "body")]
+        public string Body { get; set; }
+
+        [JsonProperty(PropertyName = "device_iden")]
+        public string TargetDevice { get; set; }
     }
 }
