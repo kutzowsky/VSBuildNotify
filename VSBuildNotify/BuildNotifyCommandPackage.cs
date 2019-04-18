@@ -15,6 +15,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
 using VSBuildNotify.DTO;
 using VSBuildNotify.Notifiers;
+using VSBuildNotify.Notifiers.Pushbullet;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSBuildNotify
@@ -102,11 +103,18 @@ namespace VSBuildNotify
         {
             if (CommandExecuted)
             {
-                string messageTitle = "Build completed";
+                // We could hardcode it all
+                // So that is what wee did... (add some configuration somehow)
+
+                string messageTitle = "Build completed";    
                 string messageBody = _overallBuildSuccess ? "Success!!!" : "Error :(";
                 var notification = new Notification(messageTitle, messageBody);
 
-                var notifier = new MessageBoxNotifier(this);
+                const string PUSHBULLET_AUTH_TOKEN = "TOP SECRET";
+                const string TARGET_DEVICE_ID = "SOME GUID";
+
+                var notifier = new PushbulletNotifier(new PushbulletClient(PUSHBULLET_AUTH_TOKEN), TARGET_DEVICE_ID); //TODO: use name on a device instead of internal Pushbullet ID
+
                 notifier.Send(notification);
 
                 _overallBuildSuccess = true;
