@@ -79,6 +79,11 @@
                     id="BuildNotifyCommandId" context="UICONTEXT_SolutionExists" />
   </VisibilityConstraints>
 
+  <KeyBindings>
+    <KeyBinding guid="guidBuildNotifyCommandPackageCmdSet" id="BuildNotifyCommandId"
+        key1="VK_F6" mod1="CONTROL" mod2="ALT" editor="guidVSStd97" />
+  </KeyBindings>
+
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidBuildNotifyCommandPackage" value="{d2a9f380-f42f-43bd-855c-5b8f08bb8c08}" />
