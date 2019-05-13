@@ -62,6 +62,15 @@
     <Compile Include="Notifiers\Pushbullet\Push.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletClient.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletNotifier.cs" />
+    <Compile Include="Options\OptionsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Options\OptionsPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Options\OptionsPageControl.Designer.cs">
+      <DependentUpon>OptionsPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +189,9 @@
     <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.122\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Options\OptionsPageControl.resx">
+      <DependentUpon>OptionsPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
       <ManifestResourceName>VSPackage</ManifestResourceName>

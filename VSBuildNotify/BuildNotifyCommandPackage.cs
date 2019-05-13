@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using VSBuildNotify.DTO;
 using VSBuildNotify.Notifiers;
 using VSBuildNotify.Notifiers.Pushbullet;
+using VSBuildNotify.Options;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSBuildNotify
@@ -42,6 +43,7 @@ namespace VSBuildNotify
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(BuildNotifyCommandPackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
+    [ProvideOptionPage(typeof(OptionsPage), "Build Notify", "Basic settings", 0, 0, true)]
     public sealed class BuildNotifyCommandPackage : AsyncPackage
     {
         /// <summary>
