@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using VSBuildNotify.Notifiers;
 
 namespace VSBuildNotify.Options
 {
@@ -13,7 +13,19 @@ namespace VSBuildNotify.Options
 
         internal void Initialize()
         {
-            //page init goes here
+            txtTitle.Text = optionsPage.GeneralOptions.NotificationTitle;
+            txtSuccessText.Text = optionsPage.GeneralOptions.SucessText;
+            txtFailureText.Text = optionsPage.GeneralOptions.FailureText;
+
+            cmbNotificationType.SelectedIndex = (int)NotifierType.MESSAGE_BOX;
+
+            txtPushbulletAuthToken.Text = optionsPage.PushbulletOptions.AuthToken;
+            txtPushbulletDeviceId.Text = optionsPage.PushbulletOptions.TargetDeviceId;
+        }
+
+        private void txtTitle_Leave(object sender, System.EventArgs e)
+        {
+            optionsPage.GeneralOptions.NotificationTitle = ((TextBox)sender).Text;
         }
     }
 }

@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtTitle = new System.Windows.Forms.TextBox();
-            this.txtSuccessText = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.cmbNotificationType = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtFailureText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbNotificationType = new System.Windows.Forms.ComboBox();
+            this.txtSuccessText = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtPushbulletDeviceId = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtPushbulletAuthToken = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.txtPushbulletAuthToken = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,6 +64,76 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
+            // 
+            // cmbNotificationType
+            // 
+            this.cmbNotificationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbNotificationType.FormattingEnabled = true;
+            this.cmbNotificationType.Items.AddRange(new object[] {
+            "Messagebox",
+            "Pushbullet"});
+            this.cmbNotificationType.Location = new System.Drawing.Point(106, 113);
+            this.cmbNotificationType.Name = "cmbNotificationType";
+            this.cmbNotificationType.Size = new System.Drawing.Size(146, 21);
+            this.cmbNotificationType.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Notification type";
+            // 
+            // txtFailureText
+            // 
+            this.txtFailureText.Location = new System.Drawing.Point(106, 80);
+            this.txtFailureText.Name = "txtFailureText";
+            this.txtFailureText.Size = new System.Drawing.Size(283, 20);
+            this.txtFailureText.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 83);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Failure text";
+            // 
+            // txtSuccessText
+            // 
+            this.txtSuccessText.Location = new System.Drawing.Point(106, 54);
+            this.txtSuccessText.Name = "txtSuccessText";
+            this.txtSuccessText.Size = new System.Drawing.Size(283, 20);
+            this.txtSuccessText.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Success text";
+            // 
+            // txtTitle
+            // 
+            this.txtTitle.Location = new System.Drawing.Point(106, 28);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(283, 20);
+            this.txtTitle.TabIndex = 1;
+            this.txtTitle.Leave += new System.EventHandler(this.txtTitle_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Notification title";
             // 
             // flowLayoutPanel1
             // 
@@ -88,75 +158,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pushbullet";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Notification title";
-            // 
-            // txtTitle
-            // 
-            this.txtTitle.Location = new System.Drawing.Point(106, 28);
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(283, 20);
-            this.txtTitle.TabIndex = 1;
-            // 
-            // txtSuccessText
-            // 
-            this.txtSuccessText.Location = new System.Drawing.Point(106, 54);
-            this.txtSuccessText.Name = "txtSuccessText";
-            this.txtSuccessText.Size = new System.Drawing.Size(283, 20);
-            this.txtSuccessText.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Success text";
-            // 
-            // txtFailureText
-            // 
-            this.txtFailureText.Location = new System.Drawing.Point(106, 80);
-            this.txtFailureText.Name = "txtFailureText";
-            this.txtFailureText.Size = new System.Drawing.Size(283, 20);
-            this.txtFailureText.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 83);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Failure text";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Notification type";
-            // 
-            // cmbNotificationType
-            // 
-            this.cmbNotificationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNotificationType.FormattingEnabled = true;
-            this.cmbNotificationType.Items.AddRange(new object[] {
-            "Messagebox",
-            "Pushbullet"});
-            this.cmbNotificationType.Location = new System.Drawing.Point(106, 113);
-            this.cmbNotificationType.Name = "cmbNotificationType";
-            this.cmbNotificationType.Size = new System.Drawing.Size(146, 21);
-            this.cmbNotificationType.TabIndex = 7;
-            // 
             // txtPushbulletDeviceId
             // 
             this.txtPushbulletDeviceId.Location = new System.Drawing.Point(106, 54);
@@ -173,13 +174,6 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Target device ID";
             // 
-            // txtPushbulletAuthToken
-            // 
-            this.txtPushbulletAuthToken.Location = new System.Drawing.Point(106, 28);
-            this.txtPushbulletAuthToken.Name = "txtPushbulletAuthToken";
-            this.txtPushbulletAuthToken.Size = new System.Drawing.Size(283, 20);
-            this.txtPushbulletAuthToken.TabIndex = 9;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -188,6 +182,13 @@
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 8;
             this.label6.Text = "Auth token";
+            // 
+            // txtPushbulletAuthToken
+            // 
+            this.txtPushbulletAuthToken.Location = new System.Drawing.Point(106, 28);
+            this.txtPushbulletAuthToken.Name = "txtPushbulletAuthToken";
+            this.txtPushbulletAuthToken.Size = new System.Drawing.Size(283, 20);
+            this.txtPushbulletAuthToken.TabIndex = 9;
             // 
             // OptionsPageControl
             // 

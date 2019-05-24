@@ -59,9 +59,11 @@
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="Notifiers\INotifier.cs" />
     <Compile Include="Notifiers\MessageBoxNotifier.cs" />
+    <Compile Include="Notifiers\NotifierType.cs" />
     <Compile Include="Notifiers\Pushbullet\Push.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletClient.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletNotifier.cs" />
+    <Compile Include="Options\GeneralOptions.cs" />
     <Compile Include="Options\OptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -71,6 +73,7 @@
     <Compile Include="Options\OptionsPageControl.Designer.cs">
       <DependentUpon>OptionsPageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Options\PushbulletOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
