@@ -7,7 +7,7 @@ namespace VSBuildNotify.Notifiers.Pushbullet
         public string TargetDeviceId;
         private PushbulletClient _pushbulletClient;
 
-        public PushbulletNotifier(PushbulletClient pushbulletClient, string targetDeviceId)
+        public PushbulletNotifier(PushbulletClient pushbulletClient, string targetDeviceId) //TODO: use name of a device instead of internal Pushbullet ID
         {
             _pushbulletClient = pushbulletClient;
             TargetDeviceId = targetDeviceId;

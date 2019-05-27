@@ -61,6 +61,7 @@
     <Compile Include="Helpers\NotifierTypeValueConverter.cs" />
     <Compile Include="Notifiers\INotifier.cs" />
     <Compile Include="Notifiers\MessageBoxNotifier.cs" />
+    <Compile Include="Notifiers\NotifierFactory.cs" />
     <Compile Include="Notifiers\NotifierType.cs" />
     <Compile Include="Notifiers\Pushbullet\Push.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletClient.cs" />

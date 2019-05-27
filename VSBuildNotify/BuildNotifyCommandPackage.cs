@@ -105,21 +105,18 @@ namespace VSBuildNotify
         {
             if (CommandExecuted)
             {
-                // We could hardcode it all
-                // So that is what wee did... (add some configuration somehow)
+                OptionsPage options = (OptionsPage)GetDialogPage(typeof(OptionsPage));
 
-                string messageTitle = "Build completed";    
-                string messageBody = _overallBuildSuccess ? "Success!!!" : "Error :(";
+                string messageTitle = options.NotificationTitle;
+                string messageBody = _overallBuildSuccess ? options.SucessText : options.FailureText;
                 var notification = new Notification(messageTitle, messageBody);
-
-                const string PUSHBULLET_AUTH_TOKEN = "TOP SECRET";
-                const string TARGET_DEVICE_ID = "SOME GUID";
 
                 //TODO: maybe some logging?
                 //TODO: error handling
 
-                var notifier = new PushbulletNotifier(new PushbulletClient(PUSHBULLET_AUTH_TOKEN), TARGET_DEVICE_ID); //TODO: use name of a device instead of internal Pushbullet ID
+                var notifierFactory = new NotifierFactory(this, options);
 
+                var notifier = notifierFactory.GetNotifier(options.NotifierType);
                 notifier.Send(notification);
 
                 _overallBuildSuccess = true;
