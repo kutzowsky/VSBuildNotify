@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="VSBuildNotify.Options.OptionsPageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VSBuildNotify.Options"
+             xmlns:helpers="clr-namespace:VSBuildNotify.Helpers"
+             mc:Ignorable="d" Height="305" LostKeyboardFocus="UserControl_LostKeyboardFocus" Width="509">
+
+    <UserControl.Resources>
+        <helpers:NotifierTypeValueConverter x:Key="NotifierTypeValueConverter" />
+    </UserControl.Resources>
+
+    <StackPanel HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+        <GroupBox Header="General" Width="470" Height="188">
+            <Grid HorizontalAlignment="Left" Height="150" Margin="10,10,-2,0" VerticalAlignment="Top" Width="450">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="47*"></ColumnDefinition>
+                    <ColumnDefinition Width="103*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Content="Notification title" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Height="26" Margin="0,6" Width="96"/>
+                <Label Content="Sucess text" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Height="26" Margin="0,6,0,5" Width="68"/>
+                <Label Content="Failure text" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Height="26" Margin="0,6" Width="68"/>
+                <Label Content="Notification type" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Height="26" Margin="0,5,0,6" Width="99"/>
+
+                <TextBox Width="210" Height="22" Text="{Binding Path=NotificationTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="0,8"/>
+                <TextBox Width="210" Height="22" Text="{Binding Path=SucessText}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Margin="0,8,0,7"/>
+                <TextBox Width="210" Height="22" Text="{Binding Path=FailureText}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Margin="0,8"/>
+                <ComboBox Width="210" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" 
+                          ItemsSource="{Binding Source={StaticResource NotifierTypeValueConverter}, Path=Strings}"
+                          SelectedItem="{Binding Path=NotifierType, Converter={StaticResource NotifierTypeValueConverter}}" Height="22" Margin="0,7,0,8"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Pushbullet" Width="470" Height="94">
+            <Grid HorizontalAlignment="Left" Height="60" Margin="10,10,-2,0" VerticalAlignment="Top" Width="455">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="141*"></ColumnDefinition>
+                    <ColumnDefinition Width="314*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Content="Authentication token" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Height="26" Margin="0,2" Width="121"/>
+                <Label Content="Target device ID" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Height="26" Margin="0,2" Width="95"/>
+
+                <TextBox Width="210" Height="22" Text="{Binding Path=PushbulletAuthToken}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="0,4"/>
+                <TextBox Width="210" Height="22" Text="{Binding Path=PushbulletTargetDeviceId}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Margin="0,4"/>
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>
