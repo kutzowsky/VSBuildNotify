@@ -1,4 +1,4 @@
-﻿using VSBuildNotify.DTO;
+﻿using VSBuildNotify.Notifiers.DTO;
 
 namespace VSBuildNotify.Notifiers
 {

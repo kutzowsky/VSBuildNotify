@@ -3,7 +3,7 @@ using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using VSBuildNotify.DTO;
+using VSBuildNotify.Notifiers.DTO;
 
 namespace VSBuildNotify.Notifiers.Pushbullet
 {

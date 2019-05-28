@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using VSBuildNotify.Notifiers;
+using VSBuildNotify.Options.Page;
 
-namespace VSBuildNotify.Options
+namespace VSBuildNotify.Page.Options
 {
     [Guid("1D9ECCF3-5D2F-4112-9B25-264596873DC9")]
     public class OptionsPage : UIElementDialogPage, INotifyPropertyChanged

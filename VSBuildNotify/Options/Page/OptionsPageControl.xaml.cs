@@ -1,8 +1,9 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using VSBuildNotify.Helpers;
+using VSBuildNotify.Page.Options;
 
-namespace VSBuildNotify.Options
+namespace VSBuildNotify.Options.Page
 {
     public partial class OptionsPageControl : UserControl
     {
@@ -25,7 +26,6 @@ namespace VSBuildNotify.Options
                 if (bindingExpression != null) bindingExpression.UpdateSource();
             }
         }
-
-
     }
 }
+

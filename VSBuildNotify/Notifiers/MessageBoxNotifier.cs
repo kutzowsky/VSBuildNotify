@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
-using VSBuildNotify.DTO;
+using VSBuildNotify.Notifiers.DTO;
 
 namespace VSBuildNotify.Notifiers
 {

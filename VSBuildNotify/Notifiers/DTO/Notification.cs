@@ -1,4 +1,4 @@
-﻿namespace VSBuildNotify.DTO
+﻿namespace VSBuildNotify.Notifiers.DTO
 {
     public class Notification
     {

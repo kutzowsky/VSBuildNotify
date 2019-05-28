@@ -1,6 +1,6 @@
 ﻿using System;
 using VSBuildNotify.Notifiers.Pushbullet;
-using VSBuildNotify.Options;
+using VSBuildNotify.Page.Options;
 
 namespace VSBuildNotify.Notifiers
 {

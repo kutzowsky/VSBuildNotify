@@ -5,9 +5,9 @@ using System.Threading;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using VSBuildNotify.DTO;
 using VSBuildNotify.Notifiers;
-using VSBuildNotify.Options;
+using VSBuildNotify.Notifiers.DTO;
+using VSBuildNotify.Page.Options;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSBuildNotify

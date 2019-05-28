@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="BuildNotifyCommand.cs" />
     <Compile Include="BuildNotifyCommandPackage.cs" />
-    <Compile Include="DTO\Notification.cs" />
+    <Compile Include="Notifiers\DTO\Notification.cs" />
     <Compile Include="Helpers\ChildrenFinder.cs" />
     <Compile Include="Helpers\NotifierTypeValueConverter.cs" />
     <Compile Include="Helpers\PushbulletEnabledValueConverter.cs" />
@@ -67,10 +67,10 @@
     <Compile Include="Notifiers\Pushbullet\Push.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletClient.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletNotifier.cs" />
-    <Compile Include="Options\OptionsPage.cs">
+    <Compile Include="Options\Page\OptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Options\OptionsPageControl.xaml.cs">
+    <Compile Include="Options\Page\OptionsPageControl.xaml.cs">
       <DependentUpon>OptionsPageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -201,7 +201,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Options\OptionsPageControl.xaml">
+    <Page Include="Options\Page\OptionsPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
