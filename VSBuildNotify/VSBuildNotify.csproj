@@ -59,6 +59,7 @@
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="Helpers\ChildrenFinder.cs" />
     <Compile Include="Helpers\NotifierTypeValueConverter.cs" />
+    <Compile Include="Helpers\PushbulletEnabledValueConverter.cs" />
     <Compile Include="Notifiers\INotifier.cs" />
     <Compile Include="Notifiers\MessageBoxNotifier.cs" />
     <Compile Include="Notifiers\NotifierFactory.cs" />
