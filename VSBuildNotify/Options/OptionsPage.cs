@@ -10,22 +10,22 @@ namespace VSBuildNotify.Options
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string NotificationTitle { get { return _notificationTitle; } set { _notificationTitle = value; NotifyPropertyChanged("NotificationTitle"); } }
+        public string NotificationTitle { get { return _notificationTitle; } set { _notificationTitle = value; NotifyPropertyChanged(nameof(NotificationTitle)); } }
         private string _notificationTitle = "Build status";
 
-        public string SucessText { get { return _sucessText; } set { _sucessText = value; NotifyPropertyChanged("SucessText"); } }
+        public string SucessText { get { return _sucessText; } set { _sucessText = value; NotifyPropertyChanged(nameof(SucessText)); } }
         private string _sucessText = "Build completed successfully!";
 
-        public string FailureText { get { return _failureText; } set { _failureText = value; NotifyPropertyChanged("FailureText"); } }
+        public string FailureText { get { return _failureText; } set { _failureText = value; NotifyPropertyChanged(nameof(FailureText)); } }
         private string _failureText = "Build failed :(";
 
-        public NotifierType NotifierType { get { return _notifierType; } set { _notifierType = value; NotifyPropertyChanged("NotifierType"); } }
+        public NotifierType NotifierType { get { return _notifierType; } set { _notifierType = value; NotifyPropertyChanged(nameof(NotifierType)); } }
         private NotifierType _notifierType = NotifierType.MESSAGE_BOX;
 
-        public string PushbulletAuthToken { get { return _pushbulletAuthToken; } set { _pushbulletAuthToken = value; NotifyPropertyChanged("PushbulletAuthToken"); } }
+        public string PushbulletAuthToken { get { return _pushbulletAuthToken; } set { _pushbulletAuthToken = value; NotifyPropertyChanged(nameof(PushbulletAuthToken)); } }
         private string _pushbulletAuthToken = "AUTH TOKEN";
 
-        public string PushbulletTargetDeviceId { get { return _pushbulletTargetDeviceId; } set { _pushbulletTargetDeviceId = value; NotifyPropertyChanged("PushbulletTargetDeviceId"); } }
+        public string PushbulletTargetDeviceId { get { return _pushbulletTargetDeviceId; } set { _pushbulletTargetDeviceId = value; NotifyPropertyChanged(nameof(PushbulletTargetDeviceId)); } }
         private string _pushbulletTargetDeviceId = "AUTH TOKEN";
 
         public void NotifyPropertyChanged(string propertyName)
