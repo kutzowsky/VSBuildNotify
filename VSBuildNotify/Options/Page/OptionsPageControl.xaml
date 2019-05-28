@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-        <GroupBox Header="General" Width="470" Height="188">
+        <GroupBox Header="Common" Width="470" Height="188">
             <Grid Width="450" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="47*"></ColumnDefinition>

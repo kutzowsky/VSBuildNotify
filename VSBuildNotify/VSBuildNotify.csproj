@@ -67,6 +67,9 @@
     <Compile Include="Notifiers\Pushbullet\Push.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletClient.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletNotifier.cs" />
+    <Compile Include="Options\DTO\CommonOptions.cs" />
+    <Compile Include="Options\DTO\GeneralOptions.cs" />
+    <Compile Include="Options\DTO\PushbulletOptions.cs" />
     <Compile Include="Options\Page\OptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>

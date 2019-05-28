@@ -1,15 +1,15 @@
 ﻿using System;
 using VSBuildNotify.Notifiers.Pushbullet;
-using VSBuildNotify.Page.Options;
+using VSBuildNotify.Options.DTO;
 
 namespace VSBuildNotify.Notifiers
 {
     class NotifierFactory
     {
         private IServiceProvider _serviceProvider;
-        private OptionsPage _options;
+        private GeneralOptions _options;
 
-        public NotifierFactory(IServiceProvider serviceProvider, OptionsPage options)
+        public NotifierFactory(IServiceProvider serviceProvider, GeneralOptions options)
         {
             _serviceProvider = serviceProvider;
             _options = options;
@@ -23,8 +23,7 @@ namespace VSBuildNotify.Notifiers
                 default: 
                     return new MessageBoxNotifier(_serviceProvider);
                 case NotifierType.PUSHBULLET:
-                    var pushbulletClient = new PushbulletClient(_options.PushbulletAuthToken);
-                    return new PushbulletNotifier(pushbulletClient, _options.PushbulletTargetDeviceId);
+                    return new PushbulletNotifier(_options.Pushbullet);
             }
         }
     }

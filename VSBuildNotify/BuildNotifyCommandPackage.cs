@@ -54,10 +54,11 @@ namespace VSBuildNotify
         {
             if (CommandExecuted)
             {
-                OptionsPage options = (OptionsPage)GetDialogPage(typeof(OptionsPage));
+                var optionsPage = (OptionsPage)GetDialogPage(typeof(OptionsPage));
+                var options = optionsPage.GetGeneralOptions();
 
-                string messageTitle = options.NotificationTitle;
-                string messageBody = _overallBuildSuccess ? options.SucessText : options.FailureText;
+                string messageTitle = options.Common.NotificationTitle;
+                string messageBody = _overallBuildSuccess ? options.Common.SucessText : options.Common.FailureText;
                 var notification = new Notification(messageTitle, messageBody);
 
                 //TODO: maybe some logging?
@@ -65,7 +66,7 @@ namespace VSBuildNotify
 
                 var notifierFactory = new NotifierFactory(this, options);
 
-                var notifier = notifierFactory.GetNotifier(options.NotifierType);
+                var notifier = notifierFactory.GetNotifier(options.Common.NotifierType);
                 notifier.Send(notification);
 
                 _overallBuildSuccess = true;

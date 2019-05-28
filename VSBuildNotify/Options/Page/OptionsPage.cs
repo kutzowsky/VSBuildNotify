@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using VSBuildNotify.Notifiers;
+using VSBuildNotify.Options.DTO;
 using VSBuildNotify.Options.Page;
 
 namespace VSBuildNotify.Page.Options
@@ -28,6 +29,29 @@ namespace VSBuildNotify.Page.Options
 
         public string PushbulletTargetDeviceId { get { return _pushbulletTargetDeviceId; } set { _pushbulletTargetDeviceId = value; NotifyPropertyChanged(nameof(PushbulletTargetDeviceId)); } }
         private string _pushbulletTargetDeviceId = "AUTH TOKEN";
+
+        public GeneralOptions GetGeneralOptions()
+        {
+            var commonOptions = new CommonOptions
+            {
+                NotificationTitle = _notificationTitle,
+                SucessText = _sucessText,
+                FailureText = _failureText,
+                NotifierType = _notifierType
+            };
+
+            var pushbulletOptions = new PushbulletOptions
+            {
+                AuthToken = _pushbulletAuthToken,
+                TargetDeviceId = _pushbulletTargetDeviceId
+            };
+
+            return new GeneralOptions
+            {
+                Common = commonOptions,
+                Pushbullet = pushbulletOptions
+            };
+        }
 
         public void NotifyPropertyChanged(string propertyName)
         {
