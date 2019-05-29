@@ -64,6 +64,7 @@
     <Compile Include="Notifiers\MessageBoxNotifier.cs" />
     <Compile Include="Notifiers\NotifierFactory.cs" />
     <Compile Include="Notifiers\NotifierType.cs" />
+    <Compile Include="Notifiers\Pushbullet\InvalidRequestException.cs" />
     <Compile Include="Notifiers\Pushbullet\Push.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletClient.cs" />
     <Compile Include="Notifiers\Pushbullet\PushbulletNotifier.cs" />

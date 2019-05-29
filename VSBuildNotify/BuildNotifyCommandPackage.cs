@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using VSBuildNotify.Notifiers;
 using VSBuildNotify.Notifiers.DTO;
 using VSBuildNotify.Page.Options;
@@ -62,16 +64,55 @@ namespace VSBuildNotify
                 var notification = new Notification(messageTitle, messageBody);
 
                 //TODO: maybe some logging?
-                //TODO: error handling
 
                 var notifierFactory = new NotifierFactory(this, options);
 
                 var notifier = notifierFactory.GetNotifier(options.Common.NotifierType);
-                notifier.Send(notification);
+
+                try
+                {
+                    notifier.Send(notification);
+                }
+                catch (Exception exception)
+                {
+                    Handle(exception);
+                }
 
                 _overallBuildSuccess = true;
                 CommandExecuted = false;
             }
+        }
+
+        private void Handle(Exception exception)
+        {
+            var title = $"Error: {exception.GetType().Name}";
+            var message = $"Details:\n{exception.Message}";
+
+            if (exception is AggregateException)
+            {
+                var aggregateException = exception as AggregateException;
+                aggregateException = aggregateException.Flatten();
+                var messageBuilder = new StringBuilder(message);
+
+                foreach (Exception innerException in aggregateException.InnerExceptions)
+                {
+                    var baseException = innerException.GetBaseException();
+
+                    messageBuilder.AppendLine(baseException.GetType().Name);
+                    messageBuilder.AppendLine(baseException.Message);
+                    messageBuilder.AppendLine();
+                }
+
+                message = messageBuilder.ToString();
+            }
+
+            VsShellUtilities.ShowMessageBox(
+                this,
+                message,
+                title,
+                OLEMSGICON.OLEMSGICON_WARNING,
+                OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
     }
 }

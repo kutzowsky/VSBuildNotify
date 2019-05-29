@@ -38,7 +38,7 @@ namespace VSBuildNotify.Notifiers.Pushbullet
                 var content = new StringContent(JsonConvert.SerializeObject(push), Encoding.UTF8, "application/json");
                 var result = client.PostAsync("pushes", content).Result;
 
-                if (!result.IsSuccessStatusCode) throw new Exception(result.Content.ReadAsStringAsync().Result);
+                if (!result.IsSuccessStatusCode) throw new InvalidRequestException(result.Content.ReadAsStringAsync().Result);
             }
         }
     }
