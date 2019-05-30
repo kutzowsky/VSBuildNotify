@@ -7,6 +7,7 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using VSBuildNotify.Helpers;
 using VSBuildNotify.Notifiers;
 using VSBuildNotify.Notifiers.DTO;
 using VSBuildNotify.Page.Options;
@@ -30,6 +31,8 @@ namespace VSBuildNotify
 
         private bool _overallBuildSuccess = true;
 
+        private Logger _logger;
+
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             var dte = GetGlobalService(typeof(DTE)) as DTE2;
@@ -40,6 +43,8 @@ namespace VSBuildNotify
 
             BuildEvents.OnBuildDone += OnSolutionBuildDone;
             BuildEvents.OnBuildProjConfigDone += OnProjectBuildDone;
+
+            _logger = new Logger(this);
 
             await BuildNotifyCommand.InitializeAsync(this);
         }
@@ -56,6 +61,8 @@ namespace VSBuildNotify
         {
             if (CommandExecuted)
             {
+                _logger.Info("Solution build done");
+
                 var optionsPage = (OptionsPage)GetDialogPage(typeof(OptionsPage));
                 var options = optionsPage.GetGeneralOptions();
 
@@ -63,15 +70,15 @@ namespace VSBuildNotify
                 string messageBody = _overallBuildSuccess ? options.Common.SucessText : options.Common.FailureText;
                 var notification = new Notification(messageTitle, messageBody);
 
-                //TODO: maybe some logging?
-
                 var notifierFactory = new NotifierFactory(this, options);
 
                 var notifier = notifierFactory.GetNotifier(options.Common.NotifierType);
 
                 try
                 {
+                    _logger.Info($"Sending notification using {options.Common.NotifierType.ToString()} notifier");
                     notifier.Send(notification);
+                    _logger.Info("Notification sent");
                 }
                 catch (Exception exception)
                 {
@@ -103,7 +110,7 @@ namespace VSBuildNotify
                     messageBuilder.AppendLine();
                 }
 
-                message = messageBuilder.ToString();
+                message = messageBuilder.ToString();                
             }
 
             VsShellUtilities.ShowMessageBox(
@@ -113,6 +120,8 @@ namespace VSBuildNotify
                 OLEMSGICON.OLEMSGICON_WARNING,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            _logger.Info($"Error occured, {message}");
         }
     }
 }
