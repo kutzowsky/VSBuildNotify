@@ -1,4 +1,5 @@
-﻿using VSBuildNotify.Notifiers.DTO;
+﻿using Microsoft.VisualStudio.Shell;
+using VSBuildNotify.Notifiers.DTO;
 using VSBuildNotify.Options.DTO;
 
 namespace VSBuildNotify.Notifiers.Pushbullet
@@ -22,7 +23,10 @@ namespace VSBuildNotify.Notifiers.Pushbullet
 
         public void Send(Notification notification)
         {
-            _pushbulletClient.PushTo(TargetDeviceId, notification);
+            ThreadHelper.JoinableTaskFactory.Run(async delegate
+            {
+                await _pushbulletClient.PushToAsync(TargetDeviceId, notification);
+            });
         }
     }
 }

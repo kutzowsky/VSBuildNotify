@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using VSBuildNotify.Notifiers.DTO;
+using System.Threading.Tasks;
 
 namespace VSBuildNotify.Notifiers.Pushbullet
 {
@@ -17,7 +18,7 @@ namespace VSBuildNotify.Notifiers.Pushbullet
             AuthToken = authToken;
         }
 
-        public void PushTo(string targetDeviceId, Notification notification)
+        public async Task PushToAsync(string targetDeviceId, Notification notification)
         {
             var push = new Push
             {
@@ -36,9 +37,9 @@ namespace VSBuildNotify.Notifiers.Pushbullet
                 client.DefaultRequestHeaders.Add("Access-Token", AuthToken);
 
                 var content = new StringContent(JsonConvert.SerializeObject(push), Encoding.UTF8, "application/json");
-                var result = client.PostAsync("pushes", content).Result;
+                var result = await client.PostAsync("pushes", content);
 
-                if (!result.IsSuccessStatusCode) throw new InvalidRequestException(result.Content.ReadAsStringAsync().Result);
+                if (!result.IsSuccessStatusCode) throw new InvalidRequestException(await result.Content.ReadAsStringAsync());
             }
         }
     }
