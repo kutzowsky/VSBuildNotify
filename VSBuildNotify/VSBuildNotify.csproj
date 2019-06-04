@@ -56,7 +56,10 @@
   <ItemGroup>
     <Compile Include="BuildNotifyCommand.cs" />
     <Compile Include="BuildNotifyCommandPackage.cs" />
+    <Compile Include="Helpers\CommandHandler.cs" />
+    <Compile Include="Helpers\ExceptionHandler.cs" />
     <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="INotificationService.cs" />
     <Compile Include="Notifiers\DTO\Notification.cs" />
     <Compile Include="Helpers\ChildrenFinder.cs" />
     <Compile Include="Helpers\NotifierTypeValueConverter.cs" />

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using VSBuildNotify.Helpers;
 using VSBuildNotify.Notifiers;
 using VSBuildNotify.Notifiers.DTO;
+using VSBuildNotify.Options.DTO;
 using VSBuildNotify.Page.Options;
 using Task = System.Threading.Tasks.Task;
 
@@ -21,7 +20,7 @@ namespace VSBuildNotify
     [Guid(PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideOptionPage(typeof(OptionsPage), "Build Notify", "Basic settings", 0, 0, true)]
-    public sealed class BuildNotifyCommandPackage : AsyncPackage
+    public sealed class BuildNotifyCommandPackage : AsyncPackage, INotificationService
     {
         public const string PackageGuidString = "d2a9f380-f42f-43bd-855c-5b8f08bb8c08";
 
@@ -32,6 +31,7 @@ namespace VSBuildNotify
         private bool _overallBuildSuccess = true;
 
         private Logger _logger;
+        private ExceptionHandler _exceptionHandler;
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
@@ -45,6 +45,7 @@ namespace VSBuildNotify
             BuildEvents.OnBuildProjConfigDone += OnProjectBuildDone;
 
             _logger = new Logger(this);
+            _exceptionHandler = new ExceptionHandler(this, _logger);
 
             await BuildNotifyCommand.InitializeAsync(this);
         }
@@ -70,58 +71,30 @@ namespace VSBuildNotify
                 string messageBody = _overallBuildSuccess ? options.Common.SucessText : options.Common.FailureText;
                 var notification = new Notification(messageTitle, messageBody);
 
-                var notifierFactory = new NotifierFactory(this, options);
-
-                var notifier = notifierFactory.GetNotifier(options.Common.NotifierType);
-
-                try
-                {
-                    _logger.Info($"Sending notification using {options.Common.NotifierType.ToString()} notifier");
-                    notifier.Send(notification);
-                    _logger.Info("Notification sent");
-                }
-                catch (Exception exception)
-                {
-                    Handle(exception);
-                }
+                SendNotification(notification, options);
 
                 _overallBuildSuccess = true;
                 CommandExecuted = false;
             }
         }
 
-        private void Handle(Exception exception)
+        public void SendNotification(Notification notification, GeneralOptions options)
         {
-            var title = $"Error: {exception.GetType().Name}";
-            var message = $"Details:\n{exception.Message}";
+            var notifierFactory = new NotifierFactory(this, options);
+            var notifierType = options.Common.NotifierType;
 
-            if (exception is AggregateException)
+            var notifier = notifierFactory.GetNotifier(notifierType);
+
+            try
             {
-                var aggregateException = exception as AggregateException;
-                aggregateException = aggregateException.Flatten();
-                var messageBuilder = new StringBuilder(message);
-
-                foreach (Exception innerException in aggregateException.InnerExceptions)
-                {
-                    var baseException = innerException.GetBaseException();
-
-                    messageBuilder.AppendLine(baseException.GetType().Name);
-                    messageBuilder.AppendLine(baseException.Message);
-                    messageBuilder.AppendLine();
-                }
-
-                message = messageBuilder.ToString();                
+                _logger.Info($"Sending notification using {notifierType.ToString()} notifier");
+                notifier.Send(notification);
+                _logger.Info("Notification sent");
             }
-
-            VsShellUtilities.ShowMessageBox(
-                this,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_WARNING,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
-
-            _logger.Info($"Error occured, {message}");
+            catch (Exception exception)
+            {
+                _exceptionHandler.Handle(exception);
+            }
         }
     }
 }

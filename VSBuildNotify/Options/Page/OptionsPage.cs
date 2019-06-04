@@ -1,7 +1,12 @@
 ﻿using Microsoft.VisualStudio.Shell;
+using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Input;
+using VSBuildNotify.Helpers;
 using VSBuildNotify.Notifiers;
+using VSBuildNotify.Notifiers.DTO;
 using VSBuildNotify.Options.DTO;
 using VSBuildNotify.Options.Page;
 
@@ -29,6 +34,13 @@ namespace VSBuildNotify.Page.Options
 
         public string PushbulletTargetDeviceId { get { return _pushbulletTargetDeviceId; } set { _pushbulletTargetDeviceId = value; NotifyPropertyChanged(nameof(PushbulletTargetDeviceId)); } }
         private string _pushbulletTargetDeviceId = "AUTH TOKEN";
+
+        public ICommand SendTestNotificationCommand { get; }
+
+        public OptionsPage() : base()
+        {
+            SendTestNotificationCommand = new CommandHandler(SendTestNotification, () => true);
+        }
 
         public GeneralOptions GetGeneralOptions()
         {
@@ -58,7 +70,18 @@ namespace VSBuildNotify.Page.Options
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected override System.Windows.UIElement Child
+        private void SendTestNotification()
+        {
+            INotificationService buildNotifyPackage = (BuildNotifyCommandPackage)GetService(typeof(BuildNotifyCommandPackage));
+
+            string messageTitle = "Test notification";
+            string messageBody = "Everything works well. Enjoy!";
+            var notification = new Notification(messageTitle, messageBody);
+
+            buildNotifyPackage.SendNotification(notification, GetGeneralOptions());
+        }
+
+        protected override UIElement Child
         {
             get { return new OptionsPageControl(this); }
         }

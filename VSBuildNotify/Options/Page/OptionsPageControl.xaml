@@ -18,13 +18,14 @@
     </UserControl.Resources>
 
     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-        <GroupBox Header="Common" Width="470" Height="188">
-            <Grid Width="450" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <GroupBox Header="Common" Width="470" Height="220">
+            <Grid Width="450" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="47*"></ColumnDefinition>
                     <ColumnDefinition Width="103*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -42,11 +43,12 @@
                 <ComboBox x:Name="cmbxNotificationType" Style="{StaticResource EditableControlStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" 
                           ItemsSource="{Binding Source={StaticResource NotifierTypeValueConverter}, Path=Strings}"
                           SelectedItem="{Binding Path=NotifierType, Converter={StaticResource NotifierTypeValueConverter}}"/>
+                <Button Command="{Binding SendTestNotificationCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Send test notification" Grid.Column="1" Grid.Row="4" Width="160"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Pushbullet" Width="470" Height="94" IsEnabled="{Binding ElementName=cmbxNotificationType, Path=SelectedIndex, Converter={StaticResource PushbulletEnabledValueConverter}}">
-            <Grid Width="455" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <GroupBox Header="Pushbullet" Width="470" Height="100" IsEnabled="{Binding ElementName=cmbxNotificationType, Path=SelectedIndex, Converter={StaticResource PushbulletEnabledValueConverter}}">
+            <Grid Width="455" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="141*"></ColumnDefinition>
                     <ColumnDefinition Width="314*"></ColumnDefinition>
