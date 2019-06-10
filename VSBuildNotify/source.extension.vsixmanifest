@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSBuildNotify.8848615e-96a1-423f-b127-1203d51f7d2a" Version="1.0" Language="en-US" Publisher="Michal Kutzner" />
+        <Identity Id="VSBuildNotify.8848615e-96a1-423f-b127-1203d51f7d2a" Version="1.3" Language="en-US" Publisher="Michal Kutzner" />
         <DisplayName>VSBuildNotify</DisplayName>
-        <Description>Empty VSIX Project.</Description>
+        <Description xml:space="preserve">Tired of long build process that you can do nothing about? With this Visual Studio plugin you can slack off a little and get notification when the build is done!
+
+More info at: https://github.com/kutzowsky/VSBuildNotify</Description>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />
