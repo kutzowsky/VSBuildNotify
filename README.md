@@ -13,7 +13,11 @@ Start the solution build via **Tools -> Build Solution and Notify** (or just hit
 Notification channel configuration can be done via **Tools -> Options -> Build Notify**.
 
 ## Requirements
-Developed and tested in **Visual Studio 2017**.
+Developed in **Visual Studio 2017**.
+
+Tested in:
+* Visual Studio 2017,
+* Visual Studio 2019.
 
 ## Supported notification channels
 * MessageBox (mainly for testing purposes),
